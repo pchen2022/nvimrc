@@ -11,12 +11,9 @@ local map = vim.api.nvim_set_keymap
 
 --------------------------------------------------------------------
 -- 插件快捷键
-local pluginKeys = {}
-
 
 -- 1. nvim-tree
 
--- map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 map("n", "<leader>n", ":NvimTreeFindFile<CR>", opt)
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", opt)
