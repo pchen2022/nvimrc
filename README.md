@@ -1,4 +1,14 @@
-# 1. nvim-tree
+# 一、非插件
+
+## 1.1 系统剪切板
+
+
+## 1.2 分屏大小调整
+
+
+# 二、插件
+
+# 2.1 nvim-tree
 
 - <leader>1 打开关闭目录树
 - <leader>fc 在目录树中定位到当前文件
@@ -17,7 +27,7 @@
 
 
 
-# 1. telescope
+# 2.2 telescope
 
 - 查找文件: <leader>ff
 - 查找文字: <leader>fg
