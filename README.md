@@ -16,6 +16,10 @@
 - Ctrl+down: 垂直方向缩小
 
 
+## 1.3 终端
+- :terminal 自带终端
+
+
 # 二、插件
 
 # 2.1 nvim-tree
