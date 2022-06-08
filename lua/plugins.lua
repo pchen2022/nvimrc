@@ -27,5 +27,12 @@ return require('packer').startup(function()
     use "onsails/lspkind-nvim"
     -- github copilot
     -- use "github/copilot.vim"
+	
+	-- LSP 基础服务
+	use "neovim/nvim-lspconfig"
+	-- 自动安装 LSP
+	-- use "williamboman/nvim-lsp-installer"
+	-- LSP UI 美化
+	-- use "tami5/lspsaga.nvim"
 
 end)

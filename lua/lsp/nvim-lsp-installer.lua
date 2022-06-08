@@ -1,0 +1,54 @@
+-- local lsp_installer_servers = require "nvim-lsp-installer.servers"
+-- 
+-- -- 安装列表
+-- -- https://github.com/williamboman/nvim-lsp-installer#available-lsps
+-- -- { key: 语言 value: 配置文件 }
+-- local servers = {
+--   sumneko_lua = require("lsp.config.lua"),
+--   bashls = require("lsp.config.bash"),
+--   pyright = require("lsp.config.pyright"),
+--   html = require("lsp.config.html"),
+--   cssls = require("lsp.config.css"),
+--   emmet_ls = require("lsp.config.emmet"),
+--   jsonls = require("lsp.config.json"),
+--   tsserver = require("lsp.config.ts"),
+--   yamlls = require("lsp.config.yamlls"),
+--   remark_ls = require("lsp.config.markdown"),
+-- }
+-- 
+-- -- 自动安装 LanguageServers
+-- -- for name, _ in pairs(servers) do
+-- --   local server_is_found, server = lsp_installer.get_server(name)
+-- --   if server_is_found then
+-- --     if not server:is_installed() then
+-- --       print("Installing " .. name)
+-- --       server:install()
+-- --     end
+-- --   end
+-- -- end
+-- 
+-- -- 自动安装或启动 LanguageServers
+-- for server_name, server_options in pairs(servers) do
+--     local server_available, server = lsp_installer_servers.get_server(server_name)
+--     -- 判断服务是否可用
+--     if server_available then
+--         -- 判断服务是否准备就绪，若就绪则启动服务
+--         server:on_ready(
+--             function()
+--                 -- keybind
+--                 server_options.on_attach = attach
+--                 -- options config
+--                 server_options.flags = {
+--                     debounce_text_changes = 150
+--                 }
+--                 -- 启动服务
+--                 server:setup(server_options)
+--             end
+--         )
+--         -- 如果服务器没有下载，则通过 notify 插件弹出下载提示
+--         if not server:is_installed() then
+--             vim.notify("Install Language Server : " .. server_name, "WARN", {title = "Language Servers"})
+--             server:install()
+--         end
+--     end
+-- end
