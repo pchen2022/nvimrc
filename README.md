@@ -50,6 +50,12 @@
 - ]c 跳到下一个git修改的文件
 - [c 跳到上一个git修改的文件
 
+# 2.2 nvim-cmp
+
+- tab 下一个
+- shift+tab 上一个
+- ctrl+j 补全的函数详情向下翻页
+- ctrl+k 补全的函数详情向上翻页
 
 
 # 2.2 telescope

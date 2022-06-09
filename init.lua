@@ -8,4 +8,4 @@ require('plugin-config/bufferline')
 
 -- lsp配置
 require('lsp/nvim-cmp')
-require('lsp/lspconfig')
+require('lsp/nvim-lsp')

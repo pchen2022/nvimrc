@@ -12,27 +12,23 @@ return require('packer').startup(function()
 		 requires = 'kyazdani42/nvim-web-devicons'
  	}
 
-	-- 自动代码补全系列插件
-	-- nvim-cmp
+	-- lsp
+	use "neovim/nvim-lspconfig"
+	-- use "williamboman/nvim-lsp-installer"
+	-- use "tami5/lspsaga.nvim"
+
+	-- auto complete
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
-    -- vsnip
+    --
     use "hrsh7th/cmp-vsnip"
     use "hrsh7th/vim-vsnip"
-	use "rafamadriz/friendly-snippets"
-	-- lspkind
-    use "onsails/lspkind-nvim"
-    -- github copilot
+	-- use "rafamadriz/friendly-snippets"
+    -- use "onsails/lspkind-nvim"
     -- use "github/copilot.vim"
-	
-	-- LSP 基础服务
-	use "neovim/nvim-lspconfig"
-	-- 自动安装 LSP
-	-- use "williamboman/nvim-lsp-installer"
-	-- LSP UI 美化
-	-- use "tami5/lspsaga.nvim"
+	vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 end)
