@@ -7,7 +7,7 @@ cmp.setup {
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  mapping = require'keybindings'.cmp(cmp),
+  mapping = require('keybindings').mapcmp(cmp),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
