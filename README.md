@@ -17,6 +17,7 @@
 ## 1.3 终端
 
 *   :terminal 自带终端
+- 由终端插件toggleterm替代
 
 # 二、插件
 
@@ -70,17 +71,44 @@ gn 跳转到下一个语法有问题的地方
 gp 跳转到上一个语法有问题的地方
 <leader>rn 重命名
 <leader>ca
-<leader>= 格式化代码
+<leader>= 格式化代码, 考虑使用代码格式化插件替代
+
+# 2.4 nvim-treesitter 
+gnn 初始化增量选择
+grn node增量选择
+grm node缩量选择
+grc scope增量选择
+= 对选中的代码格式化, 考虑使用代码格式化插件替代
+zc 折叠{}中的代码，可替换
+zo 展开{}中的代码，可替换
+
+# 2.4 toggleterm
+
+<leader>tt 打开普通终端
+<leader>tf 打开浮动终端
+<leader>tg 打开lazy git终端
+<leader>ta 打开或关闭所有终端
 
 
 # 2.2 telescope
 
-*   查找文件: <leader>ff
-*   查找文字: <leader>fg
-*   查找特殊符号: <leader>fb
-*   查找帮助文档: <leader>fh
-*   查找最近打开的文件: <leader>fo
-*   查找 marks 标记: <leader>fm
+*   <leader>ff 查找文件
+*   <leader>fg 文件中查找字符串
+*   <leader>fb buffer中查找帮助文件
+*   <leader>fh 查看帮助文档
+*   <leader>fo oldfiles中查找最近打开的文件
+*   <leader>fm 查找marks标记
+<CR> 打开选中的搜索结果
+<Tab> 选中下一个(插入模式和普通模式)
+<S-Tab> 选中上一个(插入模式和普通模式)
+<C-n> 选中下一个(普通模式)
+<C-n> 选中下一个(普通模式)
+<j> 选中下一个(插入模式)
+<k> 选中下一个(插入模式)
+<C-v> 垂直拆分打开选中的搜索结果
+<C-x> 水平拆分打开选中的搜索结果
+<C-c> 退出搜索框
+
 
 ```cmd
 <CR> 打开选中的搜索结果

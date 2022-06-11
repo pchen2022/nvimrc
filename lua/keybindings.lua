@@ -1,27 +1,27 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
-local opt = {
-  noremap = true,
-  silent = true,
+vim.keybinds = {
+  gmap = vim.api.nvim_set_keymap,
+  bmap = vim.api.nvim_buf_set_keymap,
+  dgmap = vim.api.nvim_del_keymap,
+  dbmap = vim.api.nvim_buf_del_keymap,
+  opts = { noremap = true, silent = true }
 }
 
--- 本地变量
-local map = vim.api.nvim_set_keymap
 ----------------
 -- 常用快捷键 --
 ----------------
 
 -- 1. 系统剪切板
-map("v", "<C-c>", '"+y', opt)
-map("v", "<C-x>", '"+x', opt)
-map("i", "<C-v>", '<Esc>"+pA', opt)
+vim.keybinds.gmap("v", "<C-c>", '"+y', vim.keybinds.opts)
+vim.keybinds.gmap("v", "<C-x>", '"+x', vim.keybinds.opts)
+vim.keybinds.gmap("i", "<C-v>", '<Esc>"+pA', vim.keybinds.opts)
 
 -- 2. 分屏大小调整
-map("n", "<C-right>", ':vertical resize +2<CR>', opt)
-map("n", "<C-left>", ':vertical resize -2<CR>', opt)
-map("n", "<C-up>", ':resize +2<CR>', opt)
-map("n", "<C-down>", ':resize -2<CR>', opt)
+vim.keybinds.gmap("n", "<C-right>", ':vertical resize +2<CR>', vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-left>", ':vertical resize -2<CR>', vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-up>", ':resize +2<CR>', vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-down>", ':resize -2<CR>', vim.keybinds.opts)
 
 
 ----------------
@@ -30,13 +30,66 @@ map("n", "<C-down>", ':resize -2<CR>', opt)
 local pluginKeys = {}
 
 -- 1. nvim-tree
-map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
-map("n", "<leader>n", ":NvimTreeFindFile<CR>", opt)
-map("n", "<leader>r", ":NvimTreeRefresh<CR>", opt)
+vim.keybinds.gmap("n", "<leader>e", ":NvimTreeToggle<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>n", ":NvimTreeFindFile<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>r", ":NvimTreeRefresh<CR>", vim.keybinds.opts)
 
 -- 2. bufferline
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+vim.keybinds.gmap("n", "<C-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
+
+-- 3. nvim-treesitter
+pluginKeys.maptreesitter = function()
+  return {
+    init_selection = 'gnn',
+	node_incremental = 'grn',
+	node_decremental = 'grm',
+	scope_incremental = 'grc',
+  }
+end
+
+-- 4. toggleterm
+vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggle()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>tg", "<cmd>lua require('toggleterm').lazygit_toggle()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
+
+local term_on_open_float = function(term)
+  return {
+    -- 删除 Esc 的映射
+    vim.keybinds.dgmap("t", "<Esc>"),
+    -- 浮动终端中 Esc 是退出
+    vim.keybinds.bmap(term.bufnr, "t", "<Esc>", "<C-\\><C-n>:close<CR>", vim.keybinds.opts),
+  }
+end
+local term_on_open_lazygit = function(term)
+  return {
+    -- 删除 Esc 的映射
+    vim.keybinds.dgmap("t", "<Esc>"),
+    -- lazygit 中 q 是退出
+    vim.keybinds.bmap(term.bufnr, "i", "q", "<cmd>close<CR>", vim.keybinds.opts),
+  }
+end
+local term_on_close = function()
+  return {
+    -- 重新映射 Esc
+    vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
+  }
+end
+pluginKeys.maptoggleterm = {
+  on_open_float = term_on_open_float,
+  on_open_lazygit = term_on_open_lazygit,
+  on_close = term_on_close,
+}
+
+-- 5. telescope
+vim.keybinds.gmap("n", "<leader>ff", "<cmd>Telescope find_files theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fg", "<cmd>Telescope live_grep theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fb", "<cmd>Telescope buffers theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=dropdown<CR>", vim.keybinds.opts)
 
 -- 3. nvim-cmp
 local has_words_before = function()
@@ -76,27 +129,27 @@ end
 
 -- 4. nvim-lsp
 pluginKeys.maplsp = function(mapbuf)
-  mapbuf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
-  mapbuf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)
-  mapbuf('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opt)
-  mapbuf('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
-  mapbuf('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opt)
+  mapbuf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', vim.keybinds.opts)
 
-  mapbuf('n', 'go', '<cmd>lua vim.diagnostic.open_float()<CR>', opt)
-  mapbuf('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
-  mapbuf('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
-  -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
+  mapbuf('n', 'go', '<cmd>lua vim.diagnostic.open_float()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', vim.keybinds.opts)
+  mapbuf('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', vim.keybinds.opts)
 
-  mapbuf('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opt)
+  mapbuf('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', vim.keybinds.opts)
 
-  mapbuf('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opt)
+  mapbuf('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', vim.keybinds.opts)
 
-  mapbuf('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opt)
-  -- mapbuf('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opt)
-  -- mapbuf('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opt)
-  -- mapbuf('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
-  -- mapbuf('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
-  -- mapbuf('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+  mapbuf('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', vim.keybinds.opts)
+  -- mapbuf('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', vim.keybinds.opts)
 end
 
 return pluginKeys

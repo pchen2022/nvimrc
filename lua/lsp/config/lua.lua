@@ -11,7 +11,7 @@ local opts = {
         path = runtime_path,
       },
       diagnostics = {
-        globals = { "vim" },
+        globals = { "vim", "use", "myAutoGroup" },
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
