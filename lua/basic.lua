@@ -23,7 +23,7 @@ vim.opt.clipboard = "unnamedplus"
 -- 粘贴保留原文件格式
 -- vim.o.paste = true
 -- 配置Python解释器,这个环境中安装neovim和其他库
-vim.g.python3_host_prog = '~/.env/study/bin/python'
+vim.g.python3_host_prog = "~/.env/study/bin/python"
 -- 禁用perl、ruby和nodejs
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0

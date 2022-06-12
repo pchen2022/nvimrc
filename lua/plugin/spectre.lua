@@ -6,7 +6,6 @@
 
 require("spectre").setup(
     {
-        mapping = require('keybindings').mapspectre()
+        mapping = require("keymaps").mapspectre()
     }
 )
-
