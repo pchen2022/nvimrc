@@ -1,4 +1,4 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 
 local servers = {
   sumneko_lua = require('lsp.config.lua'), -- apt install lua-language-server
@@ -15,12 +15,12 @@ local servers = {
   pyright = require('lsp.config.python'), -- npm i -g pyright
 }
 
-for lspname, lspconfig in pairs(servers) do
-  if lspconfig ~= nil and type(lspconfig) == "table" then
+for name, config in pairs(servers) do
+  if config ~= nil and type(config) == "table" then
     -- 自定义初始化配置文件必须实现on_setup 方法
-    lspconfig.on_setup(nvim_lsp[lspname])
+    config.on_setup(lspconfig[name])
   else
     -- 使用默认参数
-    nvim_lsp[lspname].setup({})
+    lspconfig[name].setup({})
   end
 end

@@ -91,7 +91,22 @@ vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<CR
 vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=dropdown<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=dropdown<CR>", vim.keybinds.opts)
 
--- 3. nvim-cmp
+-- 6. spectre
+vim.keybinds.gmap("n", "<leader>rg", "<cmd>lua require('spectre').open()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>rb", "viw:lua require('spectre').open_file_search()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>rw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", vim.keybinds.opts)
+
+pluginKeys.mapspectre = function()
+  return {
+    ["toggle_line"] = { map = "dd", cmd = "<cmd>lua require('spectre').toggle_line()<CR>" },
+    ["enter_file"] = { map = "<CR>", cmd = "<cmd>lua require('spectre.actions').select_entry()<CR>" },
+    ["show_option_menu"] = { map = "<leader>o", cmd = "<cmd>lua require('spectre').show_options()<CR>" },
+    ["run_replace"] = { map = "<leader>R", cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>" },
+    ["change_view_mode"] = { map = "<leader>v", cmd = "<cmd>lua require('spectre').change_view()<CR>" }
+  }
+end
+
+-- 8. nvim-cmp
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -127,7 +142,7 @@ pluginKeys.mapcmp = function(cmp)
   }
 end
 
--- 4. nvim-lsp
+-- 9. nvim-lsp
 pluginKeys.maplsp = function(mapbuf)
   mapbuf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', vim.keybinds.opts)
   mapbuf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', vim.keybinds.opts)

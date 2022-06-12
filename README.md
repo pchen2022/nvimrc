@@ -51,29 +51,12 @@
 *   ]c 跳到下一个git修改的文件
 *   [c 跳到上一个git修改的文件
 
-# 2.2 nvim-cmp
+# 2.2 bufferline
 
-*   tab 下一个
-*   shift+tab 上一个
-*   ctrl+j 补全的函数详情向下翻页
-*   ctrl+k 补全的函数详情向上翻页
-*   enter 确定选中
+<C-h> 切换到前一个buffer
+<C-l> 切换到后一个buffer
 
-# 2.3 nvim-lsp
-
-gd 跳转到定义处
-gD 跳转到申明处
-gr 查看引用
-gh 查看详情
-gi
-go
-gn 跳转到下一个语法有问题的地方
-gp 跳转到上一个语法有问题的地方
-<leader>rn 重命名
-<leader>ca
-<leader>= 格式化代码, 考虑使用代码格式化插件替代
-
-# 2.4 nvim-treesitter 
+# 2.3 nvim-treesitter 
 gnn 初始化增量选择
 grn node增量选择
 grm node缩量选择
@@ -89,8 +72,7 @@ zo 展开{}中的代码，可替换
 <leader>tg 打开lazy git终端
 <leader>ta 打开或关闭所有终端
 
-
-# 2.2 telescope
+# 2.5 telescope
 
 *   <leader>ff 查找文件
 *   <leader>fg 文件中查找字符串
@@ -109,14 +91,36 @@ zo 展开{}中的代码，可替换
 <C-x> 水平拆分打开选中的搜索结果
 <C-c> 退出搜索框
 
+# 2.6 spectre
 
-```cmd
-<CR> 打开选中的搜索结果
-<Tab> 选中当前的搜索结果，可搭配 <CR> 一次性打开多个
-<C-v> 垂直拆分打开选中的搜索结果
-<C-c> 退出搜索框
-<C-n> 选择下一项目（插入模式下）
-<C-p> 选择上一个项目（插入模式下）
-j     选择下一个项目（普通模式下）
-k     选择上一个项目（普通模式下）
-```
+<leader>rg 全项目替换
+<leader>rb 当前文件buffer替换
+<leader>rw 全项目中搜索替换当前单词
+<leader>R 全部替换
+dd 删除选中/恢复删除的选中
+<CR> 前往选中的文件
+<leader>o 查看菜单(忽略大小写、忽略隐藏文件)
+<leader>v 显示差异
+
+
+# 2.8 nvim-cmp
+
+*   tab 下一个
+*   shift+tab 上一个
+*   ctrl+j 补全的函数详情向下翻页
+*   ctrl+k 补全的函数详情向上翻页
+*   enter 确定选中
+
+# 2.9 nvim-lsp
+
+gd 跳转到定义处
+gD 跳转到申明处
+gr 查看引用
+gh 查看详情
+gi
+go
+gn 跳转到下一个语法有问题的地方
+gp 跳转到上一个语法有问题的地方
+<leader>rn 重命名
+<leader>ca
+<leader>= 格式化代码, 考虑使用代码格式化插件替代
